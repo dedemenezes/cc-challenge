@@ -1,30 +1,120 @@
-## Desafio 1
+# 👶 IBGE Names CLI
 
-A primeira etapa do desafio consta na criação de uma aplicação Ruby para uso no terminal. Ao ser executada essa aplicação deve oferecer ao seu usuário as seguintes opções de consulta:
+A Ruby command-line interface (CLI) for exploring name rankings and statistics in Brazil, using data from the [IBGE API](https://servicodados.ibge.gov.br/api/docs/nomes).
 
+## 📦 Features
+
+- ✅ View the most common names in each Brazilian state (UF)
+- ✅ View name rankings filtered by gender
+- 🔜 View the most common names by city
+- 🔜 Track name usage frequency over time
+
+## 🏃 Getting Started
+
+### Requirements
+
+- Ruby `>= 3.1`
+- Bundler
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/dedemenezes/cc-challenge.git
+   cd cc-challenge
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   bundle install
+   ```
+
+3. Run the app:
+
+   ```bash
+   ruby app.rb
+   ```
+
+## 📖 Usage
+
+After launching the CLI, you'll see the following menu:
+
+```
 1. Ranking dos nomes mais comuns em uma determinada Unidade Federativa (UF)
-
-    a. Listar todas UFs e obter a sigla da UF que o usuário deseja consultar
-
-    b. Exibir o resultado em 3 tabelas:
-
-      - Uma para o ranking geral
-
-      - Outras duas tabelas separando os resultados para cada sexo
-
 2. Ranking dos nomes mais comuns em uma determinada cidade
+3. Frequência do uso de um nome ao longo dos anos
+Type 'q' or 'quit' to exit
+```
 
-    a. Obter o nome de uma cidade no terminal
+Use the number keys to choose an option. Follow the prompts to explore the dataset.
 
-    b. Exibir o resultado em 3 tabelas:
+## 🧪 Running Tests
+
+This project uses `minitest` and `webmock`.
+
+```bash
+ruby test/state_test.rb
+ruby test/ibge_test.rb
+```
+
+You can also run all tests using `rake`:
+
+```bash
+bundle exec rake test
+```
+
+## 🗂️ Project Structure
+
+```bash
+.
+├── app.rb                    # Entry point
+├── router.rb                 # CLI router/dispatcher
+├── commands/                # Command implementations
+│   └── top_common_names.rb
+├── services/                # API wrappers
+│   └── ibge_service.rb
+├── models/
+│   └── state.rb             # Represents a Brazilian state (UF)
+├── views/
+│   └── output_renderer.rb   # Handles all CLI output formatting
+├── test/
+│   ├── state_test.rb
+│   └── ibge_test.rb
+└── README.md
+```
+
+## 📚 IBGE API Reference
+
+- [Estados (UF)](https://servicodados.ibge.gov.br/api/v1/localidades/estados)
+- [Ranking de nomes por UF e sexo](https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking)
+
+## 🚀 Roadmap
+
+- [ ] Command for name ranking in cities
+  - Ranking dos nomes mais comuns em uma determinada cidade
+
+    - Obter o nome de uma cidade no terminal
+
+    - Exibir o resultado em 3 tabelas:
       - Uma para o ranking geral
       - Outras duas tabelas separando os resultados para cada sexo
+- [ ] Command for name trends over time
+  - Frequência do uso de um nome ao longo dos anos
 
-3. Frequência do uso de um nome ao longo dos anos
+    - Solicitar um ou mais nomes (separados sempre por vírgula)
 
-    a. Solicitar um ou mais nomes (separados sempre por vírgula)
+    - Exibir uma tabela única, onde cada linha representa uma década e cada coluna representa um dos nomes informados na etapa anterior
 
-    b. Exibir uma tabela única, onde cada linha representa uma década e cada coluna representa um dos nomes informados na etapa anterior
+- [ ] Improve test coverage
+- [ ] Add caching for performance
+
+
+## 📜 License
+
+MIT © [André Menezes](https://github.com/dedemenezes)
+
 
 Além da qualidade e organização do seu código, vamos avaliar também a facilidade de uso das interfaces e a qualidade da exibição dos resultados de cada consulta. Então dedique algum tempo para formatar minimamente as tabelas solicitadas.
 
