@@ -55,14 +55,8 @@ Use the number keys to choose an option. Follow the prompts to explore the datas
 This project uses `minitest` and `webmock`.
 
 ```bash
-ruby test/state_test.rb
-ruby test/ibge_test.rb
-```
-
-You can also run all tests using `rake`:
-
-```bash
-bundle exec rake test
+ruby tests/models/state_test.rb -v
+ruby tests/services/ibge_test.rb -v
 ```
 
 ## 🗂️ Project Structure
