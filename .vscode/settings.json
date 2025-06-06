@@ -1,0 +1,7 @@
+{
+  "standard.enable": true,
+  "standard.run": "bundle exec standard",
+  "standard.useBundler": true,
+
+  "ruby.lint.rubocop": false,
+}
