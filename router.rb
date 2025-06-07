@@ -2,14 +2,16 @@ require "json"
 require "faraday"
 require "pry-byebug"
 
-require_relative "services/i_b_g_e_service"
-require_relative "commands/top_commom_names"
-require_relative "services/output_renderer"
+require_relative "./commands/city_common_names"
+require_relative "./commands/top_commom_names"
+require_relative "./services/i_b_g_e_service"
+require_relative "./services/output_renderer"
 
 
 class Router
   COMMANDS = {
-    "1" => -> { TopCommomNames.new(OutputRenderer.new) }
+    "1" => -> { TopCommomNames.new(OutputRenderer.new) },
+    "2" => -> { CityCommonNames.new(OutputRenderer.new)}
   }
 
   def initialize
@@ -25,7 +27,7 @@ class Router
       print(`clear`)
       case @action
       when "1" then COMMANDS[@action]&.call.call
-      when "2" then puts "TODO: 2. Ranking dos nomes mais comuns em uma determinada cidade"
+      when "2" then COMMANDS[@action]&.call.call
       when "3" then puts "TODO: 3. Frequência do uso de um nome ao longo dos anos"
       when "q"
         @running = false if ["q", "quit"].include?(@action)

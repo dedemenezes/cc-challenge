@@ -50,4 +50,35 @@ class IBGEService
       nil
     end
   end
+
+  def self.fetch_districts
+    url = "#{BASE_URL}/v1/localidades/municipios"
+    response = Faraday.get(url)
+
+    begin
+      JSON.parse(response.body)
+    rescue JSON::ParserError => e
+      puts e
+      nil
+    end
+  end
+
+  def self.find_district(name)
+    districts = fetch_districts
+    result = districts.select { _1['nome'] == name || _1['nome'].include?(name) }
+
+    if result.empty?
+      raise NotFoundDistrictError unless result
+    elsif result.length > 1
+      result.first(5).each_with_index do |r, i|
+        puts "#{i + 1}. #{r["nome"]}"
+      end
+      puts "Select the right city (index):"
+      print "> "
+      index = gets.chomp.to_i - 1
+      State.new(id: result[index]["id"], nome: result[index]["nome"])
+    else
+      State.new(id: result[0]["id"], nome: result[0]["nome"])
+    end
+  end
 end

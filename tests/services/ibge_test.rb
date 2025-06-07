@@ -47,5 +47,22 @@ class IBGEServiceTest < Minitest::Test
     stub_request(:get, /ibge/).to_return(body: "invalid-json")
     assert_equal [], IBGEService.states
   end
-  # test "raises TimeoutError when request exceeds time limit"
+
+  def test_find_district
+    stub_request(:get, "https://servicodados.ibge.gov.br/api/v1/localidades/microrregioes")
+      .to_return(body: [
+        {"id"=>33018,
+          "nome"=>"Rio de Janeiro",
+          "mesorregiao"=>
+          {"id"=>3306,
+            "nome"=>"Metropolitana do Rio de Janeiro",
+            "UF"=>{"id"=>33, "sigla"=>"RJ", "nome"=>"Rio de Janeiro", "regiao"=>{"id"=>3, "sigla"=>"SE", "nome"=>"Sudeste"}}}},
+        {"id"=>35061,
+          "nome"=>"São Paulo",
+          "mesorregiao"=>
+          {"id"=>3515,
+            "nome"=>"Metropolitana de São Paulo",
+            "UF"=>{"id"=>35, "sigla"=>"SP", "nome"=>"São Paulo", "regiao"=>{"id"=>3, "sigla"=>"SE", "nome"=>"Sudeste"}}}}
+      ].to_json)
+  end
 end
