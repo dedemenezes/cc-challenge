@@ -20,7 +20,6 @@ class OutputRenderer
     header_two = "\s\sName\s\s\s\s\s"
 
     puts title
-
     collection.each_with_index do |name, index|
       display_table_headers(header_one, header_two) if index.zero?
 

@@ -2,6 +2,8 @@ require "faraday"
 require_relative "../models/state"
 
 class IBGEService
+  class NotFoundDistrictError < StandardError; end
+
   BASE_URL = "https://servicodados.ibge.gov.br/api"
   STATES_ENDPOINT = "v1/localidades/estados"
   NAMES_RANKING_ENDPOINT = "v2/censos/nomes/ranking"
@@ -16,8 +18,7 @@ class IBGEService
     begin
       JSON.parse names_response.body
     rescue JSON::ParserError => e
-      puts e
-      nil
+      puts "ERROR: #{e}"
     end
   end
 
