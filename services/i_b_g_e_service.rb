@@ -65,10 +65,9 @@ class IBGEService
 
   def self.find_district(name)
     districts = fetch_districts
-    result = districts.select { _1['nome'] == name || _1['nome'].include?(name) }
-
+    result = districts.select { _1['nome'].downcase == name.downcase || _1['nome'].downcase.include?(name.downcase) }
     if result.empty?
-      raise NotFoundDistrictError unless result
+      raise NotFoundDistrictError
     elsif result.length > 1
       result.first(5).each_with_index do |r, i|
         puts "#{i + 1}. #{r["nome"]}"

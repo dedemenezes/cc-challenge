@@ -59,26 +59,6 @@ ruby tests/models/state_test.rb -v
 ruby tests/services/ibge_test.rb -v
 ```
 
-## 🗂️ Project Structure
-
-```bash
-.
-├── app.rb                    # Entry point
-├── router.rb                 # CLI router/dispatcher
-├── commands/                # Command implementations
-│   └── top_common_names.rb
-├── services/                # API wrappers
-│   └── ibge_service.rb
-├── models/
-│   └── state.rb             # Represents a Brazilian state (UF)
-├── views/
-│   └── output_renderer.rb   # Handles all CLI output formatting
-├── test/
-│   ├── state_test.rb
-│   └── ibge_test.rb
-└── README.md
-```
-
 ## 📚 IBGE API Reference
 
 - [Estados (UF)](https://servicodados.ibge.gov.br/api/v1/localidades/estados)

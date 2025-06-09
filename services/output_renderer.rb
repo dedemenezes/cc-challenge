@@ -12,6 +12,8 @@ class OutputRenderer
   end
 
   def display_table_for(name, collection)
+    return "No name found" if collection.nil?
+
     title = "Most commom names at #{name}"
 
     title = yield if block_given?
